@@ -1,28 +1,40 @@
-from test import test_roman_converter
-print("convertidor de numeros a numeros romanos")
-I = 1
-V = 5
-X = 10
-L = 50
-C = 100
-D = 500
-M = 1000
+class decimal_to_roman:
+    @staticmethod
+    def decimal_to_roman(number):
+        val = [
+            1000, 900, 500, 400,
+            100, 90, 50, 40,
+            10, 9, 5, 4,
+            1
+        ]
+        syb = [
+            "M", "CM", "D", "CD",
+            "C", "XC", "L", "XL",
+            "X", "IX", "V", "IV",
+            "I"
+        ]
+        roman_num = ''
+        i = 0
+        while number > 0:
+            for _ in range(number // val[i]):
+                roman_num += syb[i]
+                number -= val[i]
+            i += 1
+        return roman_num
 
-numero = int(input("ingresa un numero y luego se convertira a romano desde otra carpeta: "))
-
-def decimal_to_roman(number: int) -> str:
-    if not (1 <= number <= 3999):
-        raise ValueError("El número debe estar entre 1 y 3999")
-
-    roman_map = [
-        (1000, "M"), (900, "CM"), (500, "D"), (400, "CD"),
-        (100, "C"), (90, "XC"), (50, "L"), (40, "XL"),
-        (10, "X"), (9, "IX"), (5, "V"), (4, "IV"), (1, "I")
-    ]
-    
-    roman_numeral = []
-    for value, symbol in roman_map:
-        while number >= value:
-            roman_numeral.append(symbol)
-            number -= value
-    return "".join(roman_numeral)
+    @staticmethod
+    def from_roman(roman):
+        roman_map = {
+            'I': 1, 'V': 5, 'X': 10, 'L': 50,
+            'C': 100, 'D': 500, 'M': 1000
+        }
+        result = 0
+        prev_value = 0
+        for char in reversed(roman):
+            value = roman_map[char]
+            if value < prev_value:
+                result -= value
+            else:
+                result += value
+            prev_value = value
+        return result

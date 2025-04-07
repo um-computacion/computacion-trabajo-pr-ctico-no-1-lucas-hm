@@ -1,7 +1,7 @@
 import unittest
 from src.roman_converter import decimal_to_roman
 
-class TestRomanConverter(unittest.TestCase):
+class Test_Roman_Converter(unittest.TestCase):
     def test_basic_numbers(self):
         self.assertEqual(decimal_to_roman(1), "I")
         self.assertEqual(decimal_to_roman(5), "V")
